@@ -1,0 +1,21 @@
+{
+  "name": "regicamp",
+  "version": "1.0.0",
+  "description": "test regicamp",
+  "main": "index.js",
+  "scripts": {
+    "turbo": "turbo",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "packages/*", 
+    "apps/*"
+  ],
+  "dependencies": {
+    "sst": "^2.36.1",
+    "turbo": "^1.10.16"
+  }
+}
