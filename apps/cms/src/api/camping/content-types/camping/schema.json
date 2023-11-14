@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "campings",
+  "info": {
+    "singularName": "camping",
+    "pluralName": "campings",
+    "displayName": "Camping",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "short_description": {
+      "type": "text"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "analytics": {
+      "type": "json"
+    },
+    "medias": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "flags": {
+      "type": "component",
+      "repeatable": false,
+      "component": "flags.camping-flags"
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "map.address"
+    }
+  }
+}

@@ -1,9 +1,38 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "pipeline": {
-      "build": {
-        "outputs": [".next/**", "!.next/cache/**"]
-      },
-      "lint": {}
-    }
+  "$schema": "https://turbo.build/schema.json",
+  "globalDotEnv": [
+    ".env"
+  ],
+  "pipeline": {
+    "build": {
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**"
+      ],
+      "dotEnv": [
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "dotEnv": [
+        ".env.development.local",
+        ".env.local",
+        ".env.development",
+        ".env"
+      ]
+    },
+    "test": {
+      "cache": false,
+      "dotEnv": [
+        ".env.test.local",
+        ".env.test",
+        ".env"
+      ]
+    },
+    "lint": {}
   }
+}

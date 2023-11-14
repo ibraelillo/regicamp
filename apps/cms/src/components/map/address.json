@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_map_addresses",
+  "info": {
+    "displayName": "address",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "address": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "string"
+    },
+    "longitude": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    }
+  }
+}

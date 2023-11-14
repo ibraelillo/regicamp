@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_flags_camping_flags",
+  "info": {
+    "displayName": "CampingFlags",
+    "icon": "lock"
+  },
+  "options": {},
+  "attributes": {
+    "best_view": {
+      "type": "boolean"
+    },
+    "most_beatiful": {
+      "type": "boolean"
+    },
+    "selected_by_press": {
+      "type": "boolean"
+    }
+  }
+}
