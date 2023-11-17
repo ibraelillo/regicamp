@@ -5,14 +5,13 @@ import * as origins from 'aws-cdk-lib/aws-cloudfront-origins'
 import * as iam from 'aws-cdk-lib/aws-iam'
 import * as s3 from 'aws-cdk-lib/aws-s3'
 import * as assets from 'aws-cdk-lib/aws-s3-assets'
-import { RemovalPolicy, Fn } from 'aws-cdk-lib'
+import { RemovalPolicy, Fn, SymlinkFollowMode } from 'aws-cdk-lib'
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment'
 import { resolve } from 'path'
 import * as lambda from 'aws-cdk-lib/aws-lambda'
+import {readdirSync} from 'node:fs'
 
 export const CMS = async ({ stack, app }: StackContext) => {
-
-    //const { paths } = useProject()
 
     const cors: BucketProps['cors'] = [
         {
@@ -46,12 +45,21 @@ export const CMS = async ({ stack, app }: StackContext) => {
     uploads.cdk.bucket.grantRead(OAI)
 
     const api = new Function(stack, 'api', {
-        handler: "./apps/cms/src/app.strapiHandler",
+        handler: "./apps/cms/",
         bind: [uploads],
         permissions: [uploads],
         url: true,
-        runtime: 'nodejs18.x',
-        copyFiles: ['config', 'src', '.tmp'].map(folder => ({ from: `apps/cms/${folder}`, to: folder }))
+        runtime: 'container',
+        // copyFiles: ['config', 'src', '.tmp', 'node_modules'].map(folder => ({ from: `apps/cms/${folder}`, to: folder })),
+        // nodejs: {
+        //     install: ['pg', '@strapi/strapi', 'mysql', 'knex', '@vendia/serverless-express'],
+        //     esbuild: { external: ['aws-sdk'] },
+        //     sourcemap: true
+        // },
+        environment: {
+            NODE_OPTIONS: '--enable-source-maps'
+        },
+        
     })
 
     const staticBehavior = (pathPattern: string, ttl = 0) => ({

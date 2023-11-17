@@ -7,7 +7,7 @@
     "dev": "dotenv -c -e ./.env.local -- turbo dev",
     "build": "dotenv -c -e ./.env.production turbo build",
     "deploy": "sst deploy",
-    "test": "dotenv -c -e ./.env.test  -- turbo test",
+    "test": "dotenv -c -e ./.env.test  -- turbo run test",
     "lint": "turbo lint"
   },
   "keywords": [],

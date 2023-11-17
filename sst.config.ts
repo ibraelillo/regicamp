@@ -2,10 +2,10 @@ import { SSTConfig } from "sst";
 import { CMS } from "./iac/CMS";
 
 const config = {
-    config: () => ({
+    config: (inputs) => ({
         name: 'regicamp',
         region: process.env.AWS_REGION || 'eu-west-3',
-
+        stage: inputs.stage === 'prod' ? undefined  : 'dev'
     }),
     async stacks(app) {
         app.setDefaultFunctionProps({

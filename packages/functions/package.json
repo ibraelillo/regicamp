@@ -2,9 +2,19 @@
   "name": "functions",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest",
+    "build": "tsup"
+  },
+  "dependencies": {
+    "@strapi/strapi": "4.15.4",
+    "@vendia/serverless-express": "4.10.4"
+  },
+  "devDependencies": {
+    "vitest": "0.34.6",
+    "tsup": "7.2.0"
   },
   "keywords": [],
   "author": "",
