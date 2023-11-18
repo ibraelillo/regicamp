@@ -50,6 +50,13 @@ export const CMS = async ({ stack, app }: StackContext) => {
         permissions: [uploads],
         url: true,
         runtime: 'container',
+        container: {
+            buildArgs: {
+                FUNCTION_DIR: '/opt/app',
+                NODE_ENV: 'production'
+            },
+            file: 'apps/cms/Dockerfile'
+        },
         // copyFiles: ['config', 'src', '.tmp', 'node_modules'].map(folder => ({ from: `apps/cms/${folder}`, to: folder })),
         // nodejs: {
         //     install: ['pg', '@strapi/strapi', 'mysql', 'knex', '@vendia/serverless-express'],

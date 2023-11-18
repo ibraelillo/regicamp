@@ -1,0 +1,17 @@
+schemaVersion: 2.2.2
+metadata:
+  name: devfile-regicamp
+  version: 2.0.0
+  projectType: Typescript
+  language: typescript
+  provider: Red Hat
+  architectures: [ 'amd64' ]
+  displayName: Distributed content system
+
+components:
+  - container:
+      image: node:20-alpine
+      endpoints:
+        - name: http-3000
+          targetPort: 3000
+    name: runtime
