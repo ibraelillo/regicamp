@@ -4,3 +4,5 @@ node_modules
 *.md
 dist
 build
+.strapi*
+.env*

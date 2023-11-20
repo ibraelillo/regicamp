@@ -2,10 +2,11 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: {
-    index: 'lambda.ts'
+    index: 'lambda/index.ts'
   },
   splitting: false,
   sourcemap: true,
-  clean: true,
-  platform: 'node'
+  clean: false,
+  platform: 'node',
+  outDir: 'lambda'
 })

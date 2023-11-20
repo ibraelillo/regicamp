@@ -16,6 +16,7 @@
     "@strapi/plugin-i18n": "4.15.4",
     "@strapi/plugin-users-permissions": "4.15.4",
     "@strapi/strapi": "4.15.4",
+    "aws-sdk": "2.1499.0",
     "pg": "8.11.3",
     "@vendia/serverless-express": "4.10.4",
     "styled-components": "5.3.3"

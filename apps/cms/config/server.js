@@ -15,7 +15,7 @@ module.exports = ({ env }) => {
       url: env('STRAPI_ADMIN_BACKEND_URL', ''),
       admin: {
         serverAdminPanel: false,
-        url: '/'
+        url: '/admin'
       }
     } : {})
 
