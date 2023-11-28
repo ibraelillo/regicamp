@@ -4,30 +4,33 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "dev": "npx sst bind strapi develop",
+    "dev": "dotenv -e ../../.env strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "build:lambda": "tsup",
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "4.15.4",
     "@strapi/plugin-graphql": "^4.15.4",
     "@strapi/plugin-i18n": "4.15.4",
     "@strapi/plugin-users-permissions": "4.15.4",
+    "strapi-plugin-init-admin-user": "0.2.3",
     "@strapi/strapi": "4.15.4",
-    "aws-sdk": "2.1499.0",
-    "pg": "8.11.3",
+    "strapi-plugin-passwordless": "4.0.14",
     "@vendia/serverless-express": "4.10.4",
-    "styled-components": "5.3.3"
-  },
-  "optionalDependencies": {
+    "@aws-sdk/client-secrets-manager": "3.454.0",
+    "pg": "8.11.3",
+    "pg-query-stream": "4.5.3",
+    "styled-components": "5.3.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "5.3.4"
+    "react-router-dom": "5.3.4",
+    "@koa/router": "12.0.1",
+    "lodash-es": "4.17.21"
   },
   "devDependencies": {
-    "tsup": "7.3.0"
+    "tsup": "8.0.1",
+    "better-sqlite3": "9.1.1"
   },
   "author": {
     "name": "A Strapi developer"

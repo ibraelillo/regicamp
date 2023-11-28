@@ -3,4 +3,6 @@ workspaces:
   - apps/*
 
 packages:
-  - "**"
+  - "packages/*"
+  - "apps/*"
+  - '!**/.sst/**'

@@ -30,11 +30,24 @@ export interface MapAddress extends Schema.Component {
   };
 }
 
+export interface SeoSeo extends Schema.Component {
+  collectionName: 'components_seo_seos';
+  info: {
+    displayName: 'seo';
+    icon: 'cog';
+  };
+  attributes: {
+    title: Attribute.String;
+    metas: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'flags.camping-flags': FlagsCampingFlags;
       'map.address': MapAddress;
+      'seo.seo': SeoSeo;
     }
   }
 }

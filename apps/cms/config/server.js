@@ -12,12 +12,14 @@ module.exports = ({ env }) => {
       populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
     },
     ...(prod ? {
+      cron: {
+        enabled: false
+      },
       url: env('STRAPI_ADMIN_BACKEND_URL', ''),
       admin: {
         serverAdminPanel: false,
         url: '/admin'
       }
     } : {})
-
   })
 };

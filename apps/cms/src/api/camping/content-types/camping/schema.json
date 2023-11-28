@@ -51,6 +51,12 @@
       "type": "component",
       "repeatable": false,
       "component": "map.address"
+    },
+    "thematique": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::thematique.thematique",
+      "inversedBy": "campings"
     }
   }
 }

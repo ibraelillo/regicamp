@@ -1,6 +1,22 @@
 {
     "version": "0.2.0",
     "configurations": [
+      {
+        "name": "Strapi Develop",
+        "request": "launch",
+        "runtimeArgs": [
+          "run",
+          "develop"
+        ],
+        "sourceMaps": true,
+        "runtimeExecutable": "pnpm",
+        // I have multiple folders in the workspace
+        "cwd": "${workspaceFolder}/apps/cms",
+        "skipFiles": [
+          "<node_internals>/**"
+        ],
+        "type": "node"
+      },
         
       {
         "name": "Debug SST Dev",
