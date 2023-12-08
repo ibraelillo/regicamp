@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_terrain_aire_stationnements",
+  "info": {
+    "displayName": "AireStationnement",
+    "icon": "car"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_contracts_valorized_linknets",
+  "info": {
+    "displayName": "ValorizedLinknet",
+    "icon": "file"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "images": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "destination": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::destination.destination"
+    }
+  }
+}

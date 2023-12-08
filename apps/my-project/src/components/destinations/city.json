@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_destinations_cities",
+  "info": {
+    "displayName": "City",
+    "icon": "pin"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "prefixes": {
+      "displayName": "Prefix",
+      "type": "component",
+      "repeatable": false,
+      "component": "prefix.prefix"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "related_destinations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::destination.destination"
+    }
+  }
+}

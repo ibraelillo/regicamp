@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contrat_thematiques",
+  "info": {
+    "singularName": "contrat-thematique",
+    "pluralName": "contrat-thematiques",
+    "displayName": "ContratThematique",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "announcer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization.organization"
+    },
+    "start": {
+      "type": "date",
+      "required": true
+    },
+    "end": {
+      "type": "date"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "contracts.contrat-thematique-item"
+    }
+  }
+}

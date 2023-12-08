@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_prefix_prefixes",
+  "info": {
+    "displayName": "Prefix",
+    "icon": "collapse"
+  },
+  "options": {},
+  "attributes": {
+    "singular": {
+      "type": "string"
+    },
+    "plural": {
+      "type": "string"
+    }
+  }
+}

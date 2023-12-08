@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_articles_sections",
+  "info": {
+    "displayName": "Section",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "title_level": {
+      "type": "integer",
+      "required": true,
+      "default": 3,
+      "min": 1,
+      "max": 6
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "image_position": {
+      "type": "enumeration",
+      "enum": [
+        "after_text",
+        "before_text"
+      ],
+      "default": "after_text"
+    }
+  }
+}

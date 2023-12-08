@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_terrain_campings",
+  "info": {
+    "displayName": "Camping",
+    "icon": "gate",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "medias": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "contracts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contract.contract"
+    },
+    "short_description": {
+      "type": "blocks"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "managedBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
+    }
+  }
+}

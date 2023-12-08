@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_contracts_contrat_thematique_items",
+  "info": {
+    "displayName": "ContratThematiqueItem",
+    "icon": "cube"
+  },
+  "options": {},
+  "attributes": {
+    "thematique": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::thematique.thematique"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

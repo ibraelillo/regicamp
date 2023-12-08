@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_terrain_aire_reservations",
+  "info": {
+    "displayName": "AireReservation",
+    "icon": "shield"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "medias": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "description": {
+      "type": "blocks"
+    }
+  }
+}

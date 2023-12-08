@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_contracts_linknets",
+  "info": {
+    "displayName": "Linknet",
+    "icon": "folder"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "destination": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::destination.destination"
+    }
+  }
+}

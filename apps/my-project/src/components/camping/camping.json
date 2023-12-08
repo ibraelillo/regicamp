@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_camping_campings",
+  "info": {
+    "displayName": "Camping",
+    "icon": "gate"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "medias": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "contracts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contract.contract"
+    },
+    "short_description": {
+      "type": "blocks"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "managedBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
+    }
+  },
+  "__filename__": "camping.json"
+}
