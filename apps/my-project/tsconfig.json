@@ -4,9 +4,7 @@
     "outDir": "dist",
     "rootDir": ".",
     "esModuleInterop": true,
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext"
+    "target": "ES2022"
   },
   "include": [
     "./",

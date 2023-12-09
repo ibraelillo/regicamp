@@ -24,8 +24,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm prune --prod --no-optiona
 FROM node:lts-bullseye-slim
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-ENV COREPACK_ENABLE_NETWORK 0
-RUN corepack enable
+RUN npm i -g pnpm
 
 
 COPY --from=prod-deps /app/node_modules /app/node_modules
@@ -34,11 +33,8 @@ COPY --from=build /app/public /app/public
 COPY --from=build /app/package.json /app/package.json
 WORKDIR /app
 
-#ENTRYPOINT ["/usr/local/bin/pnpm", "aws-lambda-ric"]
-
-RUN corepack up
-ENV PORT 8080
+ENV PORT 80
+ENV HOST "0.0.0.0"
 ENV NODE_ENV production
-EXPOSE 8080
 
-CMD ["pnpm", "run", "start"]
+CMD ["/usr/local/bin/pnpm", "run", "start"]

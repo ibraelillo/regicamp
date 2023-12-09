@@ -5,7 +5,9 @@ export default {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/*{ strapi }*/) {},
+  register(/*{ strapi }*/) {
+
+  },
 
   /**
    * An asynchronous bootstrap function that runs before
@@ -14,5 +16,9 @@ export default {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/*{ strapi }*/) {},
+  async bootstrap({ strapi }) {
+    if (process.env.AWS_DEFAULT_REGION) {
+      require('./tools/tracer')('cms')
+    }
+  },
 };

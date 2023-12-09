@@ -3,26 +3,21 @@ import { StackContext, use } from "sst/constructs";
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront'
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins'
 import * as s3 from 'aws-cdk-lib/aws-s3'
-//import * as s3assets from 'aws-cdk-lib/aws-s3-assets'
 import { RemovalPolicy, Fn, SymlinkFollowMode, Arn, Token, AssetHashType } from 'aws-cdk-lib'
 import * as rds from 'aws-cdk-lib/aws-rds'
 import { Vpc, SecurityGroup, Port } from 'aws-cdk-lib/aws-ec2';
 import { isProduction, keys, } from './utils'
 import { LogGroup, RetentionDays } from 'aws-cdk-lib/aws-logs';
 import * as lambda from 'aws-cdk-lib/aws-lambda'
-//import * as elb from 'aws-cdk-lib/aws-elasticloadbalancingv2'
 import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch'
-//import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
-//import { Database } from './Database';
 import { exec, execSync } from 'child_process';
 import { mkdirSync, mkdtempSync, readdirSync } from 'fs';
 import * as os from 'node:os'
 import * as path from 'node:path'
 import * as apprunner from '@aws-cdk/aws-apprunner-alpha'
+import { CfnObservabilityConfiguration, } from 'aws-cdk-lib/aws-apprunner'
 import * as assets from 'aws-cdk-lib/aws-ecr-assets';
-// import { dependencies } from '../apps/cms/package.json'
-// import lodashTransformer from 'esbuild-plugin-lodash'
-// import { dirname } from 'path';
+
 
 
 /**
@@ -438,30 +433,38 @@ const createBackofficeService = ({ stack, environment, appPath, vpc, securityGro
         source: apprunner.Source.fromAsset({
             asset: imageAsset,
             imageConfiguration: {
-                port: 8080,
+                port: 80,
                 environmentVariables: environment,
             }
         }),
         vpcConnector: new apprunner.VpcConnector(stack, 'connector', {
             vpc,
             securityGroups,
-            vpcConnectorName: 'cms-connect-db-aurora'
+            vpcConnectorName: 'cms-connect-db-aurora-' + stack.stage
         }),
-        serviceName: 'backend',
+        serviceName: 'backend-' + stack.stage,
         autoDeploymentsEnabled: true,
         healthCheck: apprunner.HealthCheck.http({
-            healthyThreshold: 5,
+            healthyThreshold: 2,
             interval: toCdkDuration('10 seconds'),
-            path: '/',
+            path: '/_health',
             timeout: toCdkDuration('10 seconds'),
-            unhealthyThreshold: 10,
+            unhealthyThreshold: 2,
         }),
         memory: apprunner.Memory.ONE_GB,
-        cpu: apprunner.Cpu.HALF_VCPU
+        cpu: apprunner.Cpu.HALF_VCPU,
     })
 
     api.applyRemovalPolicy(RemovalPolicy.DESTROY)
 
+    const observer = new CfnObservabilityConfiguration(stack, 'ob', {
+        observabilityConfigurationName: 'xray-tracing',
+        traceConfiguration: {
+            vendor: 'AWSXRAY'
+        }
+    })
+
+    
 
 
     return { api }
