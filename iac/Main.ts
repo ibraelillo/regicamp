@@ -61,41 +61,7 @@ export const Main = async ({ stack, app }: StackContext) => {
     })
     // -------------- end uploads -------------------
 
-
-    // -------------- layer -------------------------
-    // const { layer } = await createServerLayer({
-    //     stack,
-    //     cmsPath: 'apps/cms',
-    //     layerDescription: 'Layer containing strapi packages and database drivers',
-    //     layerName: 'strapi-' + stack.account
-    // })
-    // ------------- end layer --------------------------
-
-
     // ------------- cms lambda -------------------------
-
-    const requiredDeps = [
-        'pg',
-        'lodash',
-        '@aws-sdk/client-secrets-manager',
-        '@strapi/strapi'
-    ]
-
-    const external = [
-        'pg',
-        'mysql',
-        'tedious',
-        'mysql2',
-        'oracledb',
-        'sqlite3',
-        'redis',
-        'sequelize',
-        'mongoose',
-        'react',
-        'react-dom',
-        'graphql',
-        'esbuild'
-    ]
 
     const { api } = createBackofficeService({
         stack,
@@ -136,103 +102,11 @@ export const Main = async ({ stack, app }: StackContext) => {
     // allow cms to upload files to the bucket
     uploads.cdk.bucket.grantReadWrite(api)
 
-    // const cms = new Function(stack, 'CMS-Server', {
-    //     handler: appPath, //`${appPath}/lambda.handler`,
-    //     runtime: 'container',
-    //     container: {
-    //         file: 'Dockerfile'
-    //     },
-    //     securityGroups: [lambdaGroup],
-    //     vpc,
-    //     // layers: [layer],
-    //     permissions: [uploads],
-    //     memorySize: '1 GB',
-    //     tracing: 'active',
-    //     //runtimeManagementMode: lambda.RuntimeManagementMode.AUTO,
-    //     environment: {
-    //         AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
-    //         NODE_OPTIONS: "--enable-source-maps",
-    //         DATABASE_CLIENT: 'postgres',
-    //         DATABASE_HOST: proxy.endpoint,
-    //         DATABASE_PORT: port.toString(),
-    //         DATABASE_NAME: db.value,
-    //         DATABASE_USERNAME: credentials.username!,
-    //         DATABASE_PASSWORD: credentials.secret?.secretValueFromJson('password').toString()!,
-    //         REGION: stack.region,
-    //         STRAPI_DISABLE_EE: '1',
-    //         AUDIT_LOGS_ENABLED: '1',
-    //         WEBHOOKS_POPULATE_RELATIONS: '1',
-    //         STRAPI_TELEMETRY_DISABLED: '0',
-    //         INIT_ADMIN: '1',
-    //         DIST_DIR: 'dist',
-    //         ...keys
-    //     },
-    //     bind: [uploads, admin],
-    //     //copyFiles: ['dist/src', 'dist/config', 'package.json'].map(folder => ({ from: `${appPath}/${folder}` })),
-    //     url: true,
-    //     // hooks: {
-
-    //     //     afterBuild: async (props, out) => {
-    //     //         console.log(
-    //     //             'hello'
-    //     //         )
-
-    //     //         // execSync(`pnpm install --ignore-workspace --ignore-scripts --production --no-optional ${requiredDeps.join(' ')}`, {
-    //     //         //     cwd: out,
-    //     //         //     stdio: 'inherit'
-    //     //         // })
-
-    //     //         // execSync(`pnpm prune --ignore-workspace --prod --no-optional`, {
-    //     //         //     cwd: out,
-    //     //         //     stdio: 'inherit'
-    //     //         // })
-    //     //     }
-    //     // },
-
-    //     // nodejs: {
-    //     //     sourcemap: true,
-    //     //     splitting: false,
-    //     //     minify: false,
-    //     //     format: 'cjs',
-    //     //     install: ['@strapi/strapi', '@strapi/plugin-i18n', '@strapi/plugin-graphql'],
-    //     //     esbuild: {
-    //     //         //bundle: false,
-    //     //         platform: 'node',
-    //     //         external,
-    //     //         treeShaking: true,
-    //     //         legalComments: 'none',
-
-
-    //     //         // alias: {
-    //     //         //     'lodash': 'lodash-es'
-    //     //         // },
-    //     //         // plugins: [
-    //     //         //     lodashTransformer({
-    //     //         //         outLodashPackage: 'lodash-es'
-    //     //         //     })
-    //     //         // ]
-    //     //     }
-    //     // }
-    // })
-
     proxy.grantConnect(api)
     // -------------- end cms lambda ----------------
 
-    // -------------- backoffice --------------------
-    const { backoffice } = createBackofficeSite({
-        stack,
-        cmsPath: appPath,
-        env: {
-            ...keys
-        },
-        api,
-        statics,
-        sources,
-    })
-    // ------------- end backoffice -----------------
-
     stack.addOutputs({
-        adminUrl: backoffice.customDomainUrl || backoffice.url,
+        adminUrl: api.serviceUrl,
         apiUrl: api.serviceUrl!,
         bucket: statics.bucketName,
         uploads: uploads.bucketName
@@ -240,7 +114,6 @@ export const Main = async ({ stack, app }: StackContext) => {
 
     return {
         uploads,
-        backoffice,
         api
     }
 }
@@ -427,13 +300,16 @@ const createBackofficeService = ({ stack, environment, appPath, vpc, securityGro
 
     const imageAsset = new assets.DockerImageAsset(stack, 'ImageAssets', {
         directory: appPath,
+        buildArgs: {
+            PORT: '8080'
+        }
     });
 
     const api = new apprunner.Service(stack, 'cms', {
         source: apprunner.Source.fromAsset({
             asset: imageAsset,
             imageConfiguration: {
-                port: 80,
+                port: 8080,
                 environmentVariables: environment,
             }
         }),
@@ -464,7 +340,7 @@ const createBackofficeService = ({ stack, environment, appPath, vpc, securityGro
         }
     })
 
-    
+
 
 
     return { api }

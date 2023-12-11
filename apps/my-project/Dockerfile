@@ -33,8 +33,13 @@ COPY --from=build /app/public /app/public
 COPY --from=build /app/package.json /app/package.json
 WORKDIR /app
 
-ENV PORT 80
+ARG PORT=8080
+
+ENV PORT ${PORT}
 ENV HOST "0.0.0.0"
 ENV NODE_ENV production
 
+EXPOSE ${PORT}
 CMD ["/usr/local/bin/pnpm", "run", "start"]
+
+HEALTHCHECK --interval=1m --timeout=30s --retries=3 CMD curl --fail http://localhost:${PORT}/_health || exit 1

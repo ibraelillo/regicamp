@@ -25,11 +25,13 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
-    "styled-components": "5.3.3"
+    "styled-components": "5.3.3",
+    "knex": "3.1.0"
   },
   "devDependencies": {
     "@strapi/types": "4.15.4",
-    "@strapi/typescript-utils": "4.15.4"
+    "@strapi/typescript-utils": "4.15.4",
+    "knex": "3.1.0"
   },
   "author": {
     "name": "A Strapi developer"

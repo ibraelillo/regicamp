@@ -59,25 +59,6 @@ export interface BasicLogo extends Schema.Component {
   };
 }
 
-export interface BonPlanBonPlan extends Schema.Component {
-  collectionName: 'components_bon_plan_bon_plans';
-  info: {
-    displayName: 'BonPlan';
-    icon: 'chartBubble';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Blocks;
-    image: Attribute.Media;
-    destination: Attribute.Relation<
-      'bon-plan.bon-plan',
-      'oneToOne',
-      'api::destination.destination'
-    >;
-  };
-}
-
 export interface CampingCamping extends Schema.Component {
   collectionName: 'components_camping_campings';
   info: {
@@ -181,40 +162,6 @@ export interface DestinationsCity extends Schema.Component {
   };
 }
 
-export interface LinkedLinknet extends Schema.Component {
-  collectionName: 'components_linked_linknets';
-  info: {
-    displayName: 'linknet';
-    icon: 'cloud';
-    description: '';
-  };
-  attributes: {
-    images: Attribute.Media;
-    destination: Attribute.Relation<
-      'linked.linknet',
-      'oneToOne',
-      'api::destination.destination'
-    >;
-  };
-}
-
-export interface LinkedValorisedLinknet extends Schema.Component {
-  collectionName: 'components_linked_valorised_linknets';
-  info: {
-    displayName: 'ValorisedLinknet';
-    icon: 'cloud';
-    description: '';
-  };
-  attributes: {
-    images: Attribute.Media;
-    destination: Attribute.Relation<
-      'linked.valorised-linknet',
-      'oneToOne',
-      'api::destination.destination'
-    >;
-  };
-}
-
 export interface PrefixPrefix extends Schema.Component {
   collectionName: 'components_prefix_prefixes';
   info: {
@@ -295,15 +242,12 @@ declare module '@strapi/types' {
       'articles.section': ArticlesSection;
       'basic.link': BasicLink;
       'basic.logo': BasicLogo;
-      'bon-plan.bon-plan': BonPlanBonPlan;
       'camping.camping': CampingCamping;
       'contracts.contrat-thematique-item': ContractsContratThematiqueItem;
       'contracts.linknet': ContractsLinknet;
       'contracts.valorized-linknet': ContractsValorizedLinknet;
       'contracts.video': ContractsVideo;
       'destinations.city': DestinationsCity;
-      'linked.linknet': LinkedLinknet;
-      'linked.valorised-linknet': LinkedValorisedLinknet;
       'prefix.prefix': PrefixPrefix;
       'seo.seo': SeoSeo;
       'terrain.aire-reservation': TerrainAireReservation;
